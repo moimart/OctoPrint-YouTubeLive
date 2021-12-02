@@ -97,8 +97,8 @@ class youtubelive(octoprint.plugin.StartupPlugin,
 			try:
 				self.container = self.client.containers.run("octoprint/youtubelive:latest",command=[self._settings.get(["webcam_url"]),self._settings.get(["stream_id"]),"null","15"],detach=True,privileged=False,devices=["/dev/vchiq"],name="YouTubeLive",auto_remove=True,network_mode="host")
 				self._plugin_manager.send_plugin_message(self._identifier, dict(status=True,streaming=True))
-				self._logger.info(self._settings.get(["webcam_url"]))
-				self._logger.info(self.container.logs())
+				self._logger.info("Framerate: {}".format(self._settings.get(["framerate"])))
+				#self._logger.info(self.container.logs())
 			except Exception as e:
 				self._plugin_manager.send_plugin_message(self._identifier, dict(error=str(e),status=True,streaming=False))
 		return
