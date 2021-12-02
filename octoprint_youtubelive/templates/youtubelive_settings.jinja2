@@ -18,4 +18,16 @@
             <input class="input-checkbox" type="checkbox" data-bind="checked: settings.plugins.youtubelive.auto_start"></input>
         </div>
     </div>
+    <div class="control-group">
+        <label class="control-label">{{ _('Webcam URL') }}</label>
+        <div class="controls">
+            <input type="text" class="input-block-level" data-bind="value: settings.plugins.youtubelive.webcam_url" placeholder="Enter the webcam URL">
+        </div>
+    </div>
+     <div class="control-group">
+        <label class="control-label">{{ _('Framerate') }}</label>
+        <div class="controls">
+            <input type="text" class="input-block-level" data-bind="value: settings.plugins.youtubelive.Framerate" placeholder="Framerate (5,15,25)">
+        </div>
+    </div>
 </form>

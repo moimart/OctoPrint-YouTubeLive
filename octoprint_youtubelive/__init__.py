@@ -94,7 +94,7 @@ class youtubelive(octoprint.plugin.StartupPlugin,
 			if len(filters) == 0:
 				filters.append("null")
 			try:
-				self.container = self.client.containers.run("octoprint/youtubelive:latest",command=[self._settings.global_get(["webcam","stream"]),self._settings.get(["stream_id"]),",".join(filters)],detach=True,privileged=False,devices=["/dev/vchiq"],name="YouTubeLive",auto_remove=True,network_mode="host")
+				self.container = self.client.containers.run("octoprint/youtubelive:latest",command=[self._settings.get(["webcam_url"]),self._settings.get(["stream_id"]),",".join(filters),self._settings.get(["framerate"])],detach=True,privileged=False,devices=["/dev/vchiq"],name="YouTubeLive",auto_remove=True,network_mode="host")
 				self._plugin_manager.send_plugin_message(self._identifier, dict(status=True,streaming=True))
 			except Exception as e:
 				self._plugin_manager.send_plugin_message(self._identifier, dict(error=str(e),status=True,streaming=False))
@@ -115,17 +115,17 @@ class youtubelive(octoprint.plugin.StartupPlugin,
 	def get_update_information(self):
 		return dict(
 			youtubelive=dict(
-				displayName="YouTube Live",
+				displayName="YouTube Live with more settings",
 				displayVersion=self._plugin_version,
 
 				# version check: github repository
 				type="github_release",
-				user="jneilliii",
+				user="moimart",
 				repo="OctoPrint-YouTubeLive",
 				current=self._plugin_version,
 
 				# update method: pip
-				pip="https://github.com/jneilliii/OctoPrint-YouTubeLive/archive/{target_version}.zip"
+				pip="https://github.com/moimart/OctoPrint-YouTubeLive/archive/{target_version}.zip"
 			)
 		)
 
